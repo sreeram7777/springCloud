@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import com.example.PlayerClient.data.Player;
-import com.example.PlayerClient.fiegn.PlayerFiegn;
+import com.example.PlayerClient.service.PlayerService;
 
 import reactor.core.publisher.Flux;
 
@@ -21,7 +21,7 @@ public class PlayerController {
 	private WebClient webClient;
 	
 	@Autowired
-	private PlayerFiegn fiegn;
+	private PlayerService service;
 	
 	@GetMapping("/getDataWithWebClient")
 	public List<Player> getdata()
@@ -39,9 +39,11 @@ public class PlayerController {
 		return p;
 	}
 	
+
+	
 	@GetMapping("/getDataWithFiegn/{id}")
 	public Player getdataFromServer(@PathVariable int id)
 	{
-		return fiegn.getdatafromPlayerService(id);
+		return service.getdatafromPlayerService(id);
 	}
 }
